@@ -50,5 +50,55 @@ const ProductRegister = async (req, res, next) => {
 
 }
 
-module.exports = { ProductList, ProductRegister };
+
+const ProductUpdate = async (req,res,next) => {
+    try {
+        const id = req.params.id
+        const product = await productModel.update(req.body, {
+            where: { id }
+        })
+
+        if (product == true) {
+            res.status(204).send({
+                'sucess': true,
+                'message':`Produto atualizado com sucesso!`
+            })
+        } else {
+            res.status(400).send({
+                'sucess':true,
+                'message':`Produto não encontrado!`
+            })
+        }
+    } catch (error) {
+        res.status(404).send({
+            'sucess': false,
+            'message': `Falha na alteração do produto! ${error}`
+        })
+    }
+}
+
+const ProductDelete = async (req,res,next) => {
+    try {
+        const id = req.params.id
+        const product = await productModel.destroy(req.body, {
+            where: { id }
+        })
+
+        if (product == true) {
+            res.status(204).send({
+                'sucess':true,
+                'message':`Produto deletado com sucesso!`
+            })
+        } else {
+            res.status(400).send({
+                'sucess':true,
+                'message':`Produto não encontrado!`
+            })
+        }
+    } catch (error) {
+        
+    }
+}
+
+module.exports = { ProductList, ProductRegister, ProductUpdate, ProductDelete };
 

@@ -5,5 +5,7 @@ const UseValidation = require('../middleware/UserValidation')
 
 router.get('/', UsersController.UsersList)
 router.post('/',UseValidation.UserCreateValidation, UsersController.UsersCreate)
+router.put('/:id', UsersController.UserUpdate)
+router.delete('/:id', UsersController.UserDelete)
 
 module.exports=router
