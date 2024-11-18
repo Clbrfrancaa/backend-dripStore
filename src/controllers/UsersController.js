@@ -19,7 +19,7 @@ const UsersCreate = async(req,res,next)=>{
         const email = req.body.email 
         const password = req.body.password
 
-        //CRIPTOGRAFANDO A SENHA DO USUARIO PARA SALVAR NO BANCO
+        
         const bcrypt = require ('bcrypt')
         const saltRound = 10
         const hash = await bcrypt.hash(password, saltRound)

@@ -4,7 +4,7 @@ const Login = async (req, res, next)  => {
     try {
         const email = req.body.email
         const senha = req.body.senha
-        //RETORNANDO UM USUARIO COM O EMAIL INFORMADO
+ 
         const bcrypt = require ('bcrypt')
         // const user = await userModel.findOne({
         //     where: { email }

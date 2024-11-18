@@ -4,10 +4,6 @@ const userModel = require ('../models/UserModel')
 
 const UserCreateValidation = async (req, res, next) => {
     try {
-        // const firstname = req.body.firstname
-        // const surname = req.body.surname
-        // const email = req.body.email
-        // const password = req.body.password
 
         const { firstname, surname, email, password } = req.body
         if (!firstname || !surname || !email || !password) {
