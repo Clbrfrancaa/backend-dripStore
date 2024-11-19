@@ -15,19 +15,15 @@ const CategoryList = async (req,res, next) => {
 
 const CategoryListId = async (req,res,next) => {
     try {
-        const categoryId = await categoryModel.findOne({ where: { id } });
-        if (categoryId) {
-            return res.send({
-                
-            })
-        }
+        const categoryId = await categoryModel.findOne(req.body,{ where: { id:id } });
+        res.send(categoryId)
+      
 
-            next()
 
         } catch (error) {
             return res.status(400).json({
                 success: false,
-                message: `Falha ao encontrar categoria ${error}`
+                message: `Falha ao listar a categoria! ${error}`
             })
 
         }
@@ -121,5 +117,5 @@ const CategoryDelete = async (req,res,next) => {
 
 
 module.exports = {
-    CategoryList, CategoryCreate, CategoryUpdate, CategoryDelete
+    CategoryList,CategoryListId , CategoryCreate, CategoryUpdate, CategoryDelete
 }
