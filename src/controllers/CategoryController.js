@@ -1,6 +1,7 @@
 const categoryModel = require ('../models/CategoryModel')
 
 const CategoryList = async (req,res, next) => {
+
     try {
         const categories = await categoryModel.findAll()
         res.send(categories)
@@ -11,6 +12,27 @@ const CategoryList = async (req,res, next) => {
         })
     }
 }
+
+const CategoryListId = async (req,res,next) => {
+    try {
+        const categoryId = await categoryModel.findOne({ where: { id } });
+        if (categoryId) {
+            return res.send({
+                
+            })
+        }
+
+            next()
+
+        } catch (error) {
+            return res.status(400).json({
+                success: false,
+                message: `Falha ao encontrar categoria ${error}`
+            })
+
+        }
+
+} 
 
 
 

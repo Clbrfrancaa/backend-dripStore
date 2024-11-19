@@ -6,9 +6,9 @@ const Login = async (req, res, next)  => {
         const senha = req.body.senha
  
         const bcrypt = require ('bcrypt')
-        // const user = await userModel.findOne({
-        //     where: { email }
-        // })
+        const user = await userModel.findOne({
+            where: { email }
+        })
     
         const userPassword = user ? user.password : ''
         const hashValid = await bcrypt.compare(senha, userPassword)

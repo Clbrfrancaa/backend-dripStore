@@ -1,7 +1,7 @@
 const productModel = require ('../models/ProductModel')
 const ProductList = async (req, res, next) => {
     try {
-        const users = await userModel.findAll()
+        const users = await productModel.findAll()
         res.send(users)
     } catch (error) {
         res.send({
@@ -77,28 +77,38 @@ const ProductUpdate = async (req,res,next) => {
     }
 }
 
-const ProductDelete = async (req,res,next) => {
-    try {
-        const id = req.params.id
-        const product = await productModel.destroy(req.body, {
-            where: { id }
-        })
+const ProductDelete=async(req,res,next)=>{
 
-        if (product == true) {
-            res.status(204).send({
-                'sucess':true,
-                'message':`Produto deletado com sucesso!`
-            })
-        } else {
-            res.status(400).send({
-                'sucess':true,
-                'message':`Produto não encontrado!`
-            })
-        }
-    } catch (error) {
+
+    try{
+      const id=req.params.id
+      const validarId= await productModel.findOne({where:{id:id}})
+      
+      if(validarId){
         
+      const product = await productModel.destroy({
+        where:{id}
+      })
+      res.status(204).send({
+        success:true,
+        message:`produto deletado com sucesso ${product.id - product.nome}`
+      }) 
+    }else{
+      res.status(400).send({
+        success:false,
+        message:"produto nao encontrado"
+      })
     }
-}
+    
+    
+    
+    }catch(error){
+      res.send({
+        success:false,
+        error:`erro na requisição ${error}`
+      })
+    }
+    }
 
 module.exports = { ProductList, ProductRegister, ProductUpdate, ProductDelete };
 
