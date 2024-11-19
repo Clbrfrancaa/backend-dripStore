@@ -15,10 +15,18 @@ const CategoryList = async (req,res, next) => {
 
 const CategoryListId = async (req,res,next) => {
     try {
-        const categoryId = await categoryModel.findOne(req.body,{ where: { id:id } });
+        const id = req.params.id
+        const categoryId = await categoryModel.findOne(
+            { where: { id } });
+        if (!categoryId) {
+            return res.status(404).json({
+                sucess: false,
+                message:`Categoria não encontrada!!`
+            })
+        } 
+
         res.send(categoryId)
       
-
 
         } catch (error) {
             return res.status(400).json({

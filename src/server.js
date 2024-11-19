@@ -6,7 +6,7 @@ const login = require('./routes/RouterLogin')
 app.use('/login', login);
 
 const Produtos = require('./routes/RouterProduct');
-app.use('/Produtos', Produtos );
+app.use('/Products', Produtos );
 
 const Users = require('./routes/RouterUsers');
 app.use('/Users', Users);

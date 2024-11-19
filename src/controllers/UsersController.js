@@ -12,6 +12,31 @@ const UsersList = async(req, res, next)=>{
     }
 }
 
+const UsersListId = async (req,res,next) => {
+  try {
+      const id = req.params.id
+      const userId = await userModel.findOne(
+          { where: { id } });
+      if (!userId) {
+          return res.status(404).json({
+              sucess: false,
+              message:`Usuário não encontrado!!`
+          })
+      } 
+
+      res.send(userId)
+    
+
+      } catch (error) {
+          return res.status(400).json({
+              success: false,
+              message: `Falha na requisição ${error}`
+          })
+
+      }
+
+}
+
 const UsersCreate = async(req,res,next)=>{
     try{
         const firstname = req.body.firstname
@@ -100,4 +125,4 @@ const UserDelete = async (req,res,next) => {
 }
 
 
-module.exports={UsersList, UsersCreate, UserUpdate, UserDelete};
+module.exports={UsersList,UsersListId, UsersCreate, UserUpdate, UserDelete};
