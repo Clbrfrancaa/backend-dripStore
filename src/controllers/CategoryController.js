@@ -2,7 +2,7 @@ const categoryModel = require ('../models/CategoryModel')
 
 const CategoryList = async (req,res, next) => {
     try {
-        const categories = await categoryModel.findAll
+        const categories = await categoryModel.findAll()
         res.send(categories)
     } catch (error) {
         res.send ({
