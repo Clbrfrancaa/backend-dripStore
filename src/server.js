@@ -11,8 +11,8 @@ app.use('/Produtos', Produtos );
 const Users = require('./routes/RouterUsers');
 app.use('/Users', Users);
 
-const Category = require('./routes/RouterCategory');
-app.use('/Category', Category);
+// const Category = require('./routes/RouterCategory');
+// app.use('/Category', Category);
 
 const PORT = 3000
 app.listen(PORT, () => {
