@@ -1,6 +1,6 @@
 const { HostNotReachableError } = require("sequelize")
 const categoryModel = require ('../models/CategoryModel')
-
+const { isName } = require('validator')
 
 const CategoryCreateValidation = async (req, res, next) => {
     try {
@@ -14,9 +14,9 @@ const CategoryCreateValidation = async (req, res, next) => {
             })
         }
 
-        const categoryValidation = await categoryModel.findOne({ where: { email } });
+        const categoryValidation = await categoryModel.findOne({ where: { name } });
         if (categoryValidation) {
-            const message = 'Email já cadastrado'
+            const message = 'Categoria já cadastrado'
             return res.status(400).json({
                 success: false,
                 message: message
@@ -36,4 +36,4 @@ const CategoryCreateValidation = async (req, res, next) => {
 
 
 
-module.exports = { UserCreateValidation }
+module.exports = { CategoryCreateValidation }

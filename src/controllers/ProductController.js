@@ -12,6 +12,29 @@ const ProductList = async (req, res, next) => {
 
     }
 }
+
+const ProductListId = async (req, res, next) => {
+    try {
+        const id = req.params.id
+        const productId = await productModel.findOne(
+            { where: { id }}
+        )
+        if (!productId) {
+            return res.status(404).json({
+                sucess:false,
+                message:`Produto não encontrado!`
+            })
+        }
+
+        res.send(productId)
+
+    } catch (error) {
+        return res.status(400).json({
+            sucess:false,
+            message:`Falha de requisição ${error}`
+        })
+    }
+}
 const ProductRegister = async (req, res, next) => {
 
     try {
@@ -110,5 +133,5 @@ const ProductDelete=async(req,res,next)=>{
     }
     }
 
-module.exports = { ProductList, ProductRegister, ProductUpdate, ProductDelete };
+module.exports = { ProductList, ProductListId, ProductRegister, ProductUpdate, ProductDelete };
 
