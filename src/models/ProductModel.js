@@ -3,7 +3,7 @@ const { DataTypes } = require ('sequelize')
 
 const ProductModel = connection.define('Product', {
     enabled: {
-        type: DataTypes.BOOLEAN,
+        type: DataTypes.BOOLEAN(),
         allowNull: false,
         defaultValue:true
     },
@@ -16,12 +16,12 @@ const ProductModel = connection.define('Product', {
         allowNull:false
     },
     use_in_menu: {
-        type: DataTypes.BOOLEAN,
+        type: DataTypes.BOOLEAN(),
         allowNull:true,
         defaultValue: 0
     },
     stock: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.INTEGER(),
         defaultValue: 0,
         allowNull:true
     },
@@ -30,11 +30,11 @@ const ProductModel = connection.define('Product', {
         allowNull:true
     },
     price:{
-        type: DataTypes.FLOAT,
+        type: DataTypes.FLOAT(),
         allowNull:false
     },
     price_with_discount: {
-        type: DataTypes.FLOAT,
+        type: DataTypes.FLOAT(),
         allowNull:false
     }
 })

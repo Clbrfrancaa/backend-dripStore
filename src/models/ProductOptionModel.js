@@ -5,7 +5,7 @@ const { text } = require('express')
 
 const ProductOption = connection.define ('Product_Option', {
     product_id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.INTEGER(),
         allowNull: false,
         references: {
             model: ProductModel,
@@ -18,22 +18,22 @@ const ProductOption = connection.define ('Product_Option', {
         allowNull: false
     },
     shape: {
-        type: DataTypes.ENUM(square, circle),
+        type: DataTypes.ENUM("square", "circle"),
         allowNull: false,
         defaultValue: 'square'
     },
     radius: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.INTEGER(),
         allowNull: true,
         defaultValue: 0
     },
     type: {
-        type: DataTypes.ENUM(text, color),
+        type: DataTypes.ENUM("text", "color"),
         allowNull: true,
         defaultValue: "text"
     },
     values: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(),
         allowNull: false, 
     }
 

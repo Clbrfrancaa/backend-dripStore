@@ -1,31 +1,53 @@
 const { HostNotReachableError } = require("sequelize")
 const userModel = require ('../models/UserModel')
+const { isEmail } = require('validator')
 
 
 const UserCreateValidation = async (req, res, next) => {
     try {
-        // const firstname = req.body.firstname
-        // const surname = req.body.surname
-        // const email = req.body.email
-        // const password = req.body.password
 
         const { firstname, surname, email, password } = req.body
-        if (!firstname || !surname || !email || !password) {
-            const message = 'firstname, surname, email e password são obrigatorios'
-            return res.status(400).json({
-                sucess: false,
-                message: message
-            })
-        }
-
+         if (!firstname || !surname || !email || !password) {
+             const message = 'firstname, surname, email e password são obrigatorios'
+             return res.status(400).json({
+                 sucess: false,
+                 message: message
+             })
+         }  
+        
+        
+        
+        
+        
         const emailValidation = await userModel.findOne({ where: { email } });
-        if (emailValidation) {
-            const message = 'Email já cadastrado'
-            return res.status(400).json({
-                success: false,
-                message: message
-            })
-        }
+        const passwordValidaton = await userModel.findOne({where: { password }})
+             if (emailValidation) {
+                 const message = 'Email já cadastrado'
+                 return res.status(400).json({
+                     success: false,
+                     message: message
+                 })
+             }
+
+             if (passwordValidaton) {
+                const message = 'Senha já utilizada!'
+                return res.status(400).json({
+                    success: false,
+                    message: message
+                })
+            }
+
+
+
+             if(password.length <=8){
+                return res.status(400).json({
+                    success:false,
+                    message:"senha deve conter mais de 8 caracteres"
+                })
+            }
+
+        
+        
 
             next()
 
@@ -41,3 +63,11 @@ const UserCreateValidation = async (req, res, next) => {
 
 
 module.exports = { UserCreateValidation }
+
+
+       
+
+
+
+
+        // const requiredFields = ['firstname','surname','email','password']

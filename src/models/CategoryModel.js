@@ -11,7 +11,7 @@ const CategoryModel = connection.define ('Category', {
         allowNull: false
     },
     use_in_menu: {
-        type: DataTypes.BOOLEAN,
+        type: DataTypes.BOOLEAN(),
         allowNull: true,
         defaultValue: 0
     }
