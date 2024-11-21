@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest --coverage",
     "dev": "nodemon src/server.js",
-    "db": "node src/config/sync.js"
+    "db": "nodemon src/config/sync.js"
   },
   "keywords": [],
   "author": "David Nogueira",
