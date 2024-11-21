@@ -18,7 +18,7 @@ const CategoryCreateValidation = async (req, res, next) => {
         const slugCategoryValidation = await categoryModel.findOne({where: { slug }})
 
         if (categoryValidation || slugCategoryValidation) {
-            const message = 'Credenciais já cadastradas, favor tentar novamente!'
+            const message = 'Credenciais já cadastradas, tente novamente com outras informações!'
             return res.status(400).json({
                 success: false,
                 message: message
