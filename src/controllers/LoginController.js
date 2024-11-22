@@ -1,4 +1,6 @@
 const userModel = require ('../models/UserModel')
+const dotenv = require('dotenv')
+dotenv.config()
 
 const Login = async (req, res, next)  => {
     try {
@@ -15,7 +17,8 @@ const Login = async (req, res, next)  => {
 
         if (hashValid){
             const jwt = require('jsonwebtoken')
-            const token = jwt.sign({id: 1, name: 'David'}, 'SKFhsa73$(sgs')
+            const jwtSecret = process.env.JWT_SECRET
+            const token = jwt.sign({id: 1, name: 'David'}, jwtSecret)
             
             res.send({
                 sucess: true,

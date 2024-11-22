@@ -1,6 +1,7 @@
 
-const UserModel=require('../models/UserModel')
+const UserModel= require('../models/UserModel')
 const validator = require('validator');
+
 
 
 const UserCreateValidation = async (req,res,next)=>{
@@ -8,17 +9,19 @@ const UserCreateValidation = async (req,res,next)=>{
       
         
 
-        const {FirstName, Surname, Email, Password}=req.body
+        const {firstname, surname, email, password}=req.body
 
-        const EmailValid= await UserModel.findOne({where:{Email:Email}})
+        const emailValid= await UserModel.findOne({where:{email:email}})
 
-        if(EmailValid){
-          res.send({
-            message:'email ja cadastrado'
-          })
+        if(emailValid){
+         
+          return res.status(200).json({
+            success:false,
+            message:"email ja cadastrado"
+        })
         }
 
-        if(Password.length <=4){
+        if(password.length <=4){
             return res.status(400).json({
                 success:false,
                 message:"senha deve conter mais de 4 caracteres"
@@ -27,7 +30,7 @@ const UserCreateValidation = async (req,res,next)=>{
 
 
 
-        if(!FirstName || !Surname || !Email || !Password){
+        if(!firstname || !surname || !email || !password){
             const message="todos os campos devem ser preenchidos"
            return res.status(400).json({
                 success:false,
@@ -35,7 +38,7 @@ const UserCreateValidation = async (req,res,next)=>{
             })
         }
 
-        if (!validator.isEmail(Email)) {
+        if (!validator.isEmail(email)) {
             return res.status(400).json({
                 success:false,
                 message:'email invalido'
@@ -45,7 +48,7 @@ const UserCreateValidation = async (req,res,next)=>{
 
 next()
     }catch(error){
-        return req.status(400).json({
+        return res.status(400).json({
             success:false,
             message:`Erro na requisição ${error}`
         })
