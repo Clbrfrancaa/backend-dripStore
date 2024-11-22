@@ -1,6 +1,8 @@
 const connection = require ('../config/database/connection')
 const { DataTypes } = require('sequelize')
 
+//commit
+
 let UserModel = connection.define ('User', {
     firstname: {
         type: DataTypes.STRING(50),
